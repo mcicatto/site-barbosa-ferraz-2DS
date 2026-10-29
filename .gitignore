@@ -4,3 +4,6 @@ node_modules/
 .env
 *.log
 .vscode/
+
+# Senha/chave local da área administrativa
+paginas/admin/senha.md

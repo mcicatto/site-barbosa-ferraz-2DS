@@ -15,7 +15,11 @@ const paginas = [
   { nome: "Cursos", pasta: "cursos" },
   { nome: "Eventos", pasta: "eventos" },
   { nome: "Sala de Rec...", pasta: "sala-recursos" },
+<<<<<<< HEAD
   { nome: "Arquivos", pasta: "arquivos" },
+=======
+  { nome: "Downloads", pasta: "downloads" },
+>>>>>>> 366f922fc618dd02f1e6e8e32cc84bb806ec79da
   { nome: "Contato", pasta: "contato" }
 ];
 
