@@ -14,7 +14,8 @@ const paginas = [
   { nome: "Colégio", pasta: "colegio" },
   { nome: "Cursos", pasta: "cursos" },
   { nome: "Eventos", pasta: "eventos" },
-  { nome: "Downloads", pasta: "downloads" },
+  { nome: "Sala de Rec...", pasta: "sala-recursos" },
+  { nome: "Arquivos", pasta: "arquivos" },
   { nome: "Contato", pasta: "contato" }
 ];
 
@@ -108,14 +109,49 @@ function montarMenu() {
 
 /* ========== 3. RODAPÉ ========== */
 
-// Cria um parágrafo com um texto
-function criarParagrafo(texto, classe) {
-  const paragrafo = document.createElement("p");
-  paragrafo.textContent = texto;
-  if (classe) {
-    paragrafo.className = classe;
+// Cria um item de contato/rede social do rodapé (resumido e limpo)
+function criarCardRodape(dados) {
+  const link = document.createElement("a");
+  link.className = "rodape-item";
+  link.href = dados.url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.setAttribute("aria-label", dados.ariaLabel);
+
+  // Imagem do ícone sem caixas ou molduras
+  const imagem = document.createElement("img");
+  imagem.className = dados.classeIcone ? "rodape-item-icone " + dados.classeIcone : "rodape-item-icone";
+  imagem.src = dados.icone;
+  imagem.alt = ""; // Decorativo pois o texto descritivo e o aria-label já identificam o link
+  link.appendChild(imagem);
+
+  // Bloco de texto resumido
+  const info = document.createElement("div");
+  info.className = "rodape-item-info";
+
+  const titulo = document.createElement("strong");
+  titulo.className = "rodape-item-titulo";
+  titulo.textContent = dados.titulo;
+  info.appendChild(titulo);
+
+  if (dados.linhas && dados.linhas.length > 0) {
+    for (let i = 0; i < dados.linhas.length; i++) {
+      const linha = document.createElement("span");
+      linha.className = "rodape-item-linha";
+      linha.textContent = dados.linhas[i];
+      info.appendChild(linha);
+    }
   }
-  return paragrafo;
+
+  if (dados.nota) {
+    const nota = document.createElement("span");
+    nota.className = "rodape-item-nota";
+    nota.textContent = dados.nota;
+    info.appendChild(nota);
+  }
+
+  link.appendChild(info);
+  return link;
 }
 
 // Monta o rodapé dentro da <div id="rodape">
@@ -125,12 +161,82 @@ function montarRodape() {
     return; // a página não tem div#rodape, então não faz nada
   }
 
+  // Lista com as quatro áreas institucionais oficiais
+  const itensRodape = [
+    {
+      titulo: "WhatsApp",
+      linhas: ["+55 43 99611-3582"],
+      nota: "(Pode ser alterado com o tempo)",
+      url: "https://wa.me/5543996113582",
+      icone: "../../paginas/inicio/imagens/rodape/whatsapp.png",
+      ariaLabel: "Fale conosco pelo WhatsApp no número +55 43 99611-3582"
+    },
+    {
+      titulo: "Instagram",
+      linhas: ["@colegiobarbosaferrazivp"],
+      url: "https://www.instagram.com/colegiobarbosaferrazivp?rpxt=MXFoeG9ob3l0cXJpaA==",
+      icone: "../../paginas/inicio/imagens/rodape/instagram.png",
+      ariaLabel: "Visite nosso perfil oficial no Instagram"
+    },
+    {
+      titulo: "Facebook",
+      linhas: ["Colégio Barbosa Ferraz"],
+      url: "https://www.facebook.com/www.colegioestaduelbarbosaferraz/?locale=pt_BR",
+      icone: "../../paginas/inicio/imagens/rodape/facebook.png",
+      classeIcone: "rodape-card-icone-facebook",
+      ariaLabel: "Acesse nossa página oficial no Facebook"
+    },
+    {
+      titulo: "Endereço",
+      linhas: [
+        "Rua Rio Grande do Sul, 1200",
+        "Ivaiporã - PR, 86870-000",
+        "Brasil"
+      ],
+      url: "https://www.google.com/maps/search/?api=1&query=Rua+Rio+Grande+do+Sul%2C+1200%2C+Ivaipor%C3%A3+-+PR%2C+86870-000",
+      icone: "../../paginas/inicio/imagens/rodape/endereco.png",
+      ariaLabel: "Ver localização no Google Maps: Rua Rio Grande do Sul, 1200, Ivaiporã - PR"
+    }
+  ];
+
   const conteudo = document.createElement("div");
-  conteudo.className = "container";
-  conteudo.appendChild(criarParagrafo(nomeColegio, "rodape-nome"));
-  // Dados ainda não confirmados com a secretaria: NÃO inventar
-  conteudo.appendChild(criarParagrafo("Endereço: [CONFIRMAR] endereço"));
-  conteudo.appendChild(criarParagrafo("Telefone: [CONFIRMAR] telefone"));
+  conteudo.className = "container rodape-conteudo";
+
+  // Identificação do colégio no topo do rodapé
+  const topo = document.createElement("div");
+  topo.className = "rodape-topo";
+  const nome = document.createElement("p");
+  nome.className = "rodape-nome";
+  nome.textContent = nomeColegio;
+  topo.appendChild(nome);
+  conteudo.appendChild(topo);
+
+  // Grade com os 4 cartões clicáveis
+  const grade = document.createElement("div");
+  grade.className = "rodape-grade";
+  for (let i = 0; i < itensRodape.length; i++) {
+    grade.appendChild(criarCardRodape(itensRodape[i]));
+  }
+  conteudo.appendChild(grade);
+
+  // Rodapé inferior com mensagem institucional e acesso discreto à Área Administrativa
+  const base = document.createElement("div");
+  base.className = "rodape-base";
+
+  const direitos = document.createElement("p");
+  direitos.className = "rodape-base-texto";
+  direitos.textContent = "Educação pública, gratuita e de qualidade no Paraná.";
+  base.appendChild(direitos);
+
+  // Link de acesso discreto à área administrativa
+  const linkAdmin = document.createElement("a");
+  linkAdmin.className = "rodape-link-admin";
+  linkAdmin.href = "../admin/index.html";
+  linkAdmin.textContent = "Área administrativa";
+  linkAdmin.setAttribute("aria-label", "Acesso discreto à área administrativa");
+  base.appendChild(linkAdmin);
+
+  conteudo.appendChild(base);
 
   const rodape = document.createElement("footer");
   rodape.className = "rodape";
@@ -141,6 +247,21 @@ function montarRodape() {
 
 /* ========== 4. EXECUÇÃO ========== */
 
+// Garante que o fav-icon oficial do colégio esteja presente em todas as páginas
+function garantirFavicon() {
+  let favicon = document.querySelector('link[rel="icon"]');
+  if (!favicon) {
+    favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.type = "image/png";
+    // Todas as páginas ficam em paginas/<pasta>/ (profundidade 2),
+    // exceto subpastas que podem estar em profundidade 3
+    favicon.href = "../../imagens-principais/logo-colegio.png";
+    document.head.appendChild(favicon);
+  }
+}
+
 // O script é carregado no fim do <body>, então as divs já existem
+garantirFavicon();
 montarMenu();
 montarRodape();

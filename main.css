@@ -5,25 +5,25 @@
 
 /* ========== 1. VARIÁVEIS GLOBAIS ========== */
 :root {
-  /* Azul principal: cabeçalho, identidade visual e elementos principais. */
-  --cor-primaria: #1769AA;
+  /* Azul principal: cabeçalho, identidade visual e elementos principais (suave, sóbrio e equilibrado). */
+  --cor-primaria: #183a77;
 
-  /* Azul vivo: botões, links e demais elementos interativos. */
-  --cor-secundaria: #2E86C1;
-  --cor-link: #2E86C1;
-  --cor-destaque: #2E86C1;
+  /* Azul intermediário e vibrante moderado: botões, links e estados de ação. */
+  --cor-secundaria: #2a65cf;
+  --cor-link: #2457b2;
+  --cor-destaque: #3375c6;
 
-  /* Azul profundo: títulos, textos importantes e rodapé. */
-  --cor-profunda: #123B5D;
+  /* Azul profundo e acolhedor: títulos, textos importantes e base do rodapé. */
+  --cor-profunda: #0c1d3b;
 
-  /* Fundo branco e cinza claro para as áreas de conteúdo. */
+  /* Fundo branco e cinza suave azulado para conforto de leitura e descanso visual. */
   --cor-fundo: #FFFFFF;
-  --cor-fundo-suave: #F2F5F7;
+  --cor-fundo-suave: #F4F7FA;
   --cor-superficie: #FFFFFF;
 
-  --cor-texto: #123B5D;
-  --cor-texto-suave: #6F8FA6;
-  --cor-borda: #6F8FA6;
+  --cor-texto: #0c1d3b;
+  --cor-texto-suave: #536b88;
+  --cor-borda: #cbd6e2;
 
   --fonte-titulo: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --fonte-texto: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -35,20 +35,25 @@
   --espaco-xl: 64px;
 
   --raio: 8px;
-  --sombra: 0 2px 8px rgba(0, 0, 0, 0.12);
-  --sombra-card: 0 1px 3px rgba(18, 59, 93, 0.08);
-  --sombra-card-hover: 0 6px 16px rgba(18, 59, 93, 0.12);
+  --sombra: 0 2px 8px rgba(12, 29, 59, 0.08);
+  --sombra-card: 0 1px 3px rgba(12, 29, 59, 0.06);
+  --sombra-card-hover: 0 6px 16px rgba(12, 29, 59, 0.12);
   --largura-max: 1100px;
 
   /* Paleta preservada para o conteúdo da página Início após a sincronização. */
-  --inicio-cor-primaria-anterior: #1769AA;
-  --inicio-cor-secundaria-anterior: #2E86C1;
-  --inicio-cor-profunda-anterior: #123B5D;
+  --inicio-cor-primaria-anterior: #183a77;
+  --inicio-cor-secundaria-anterior: #2a65cf;
+  --inicio-cor-profunda-anterior: #0c1d3b;
   --inicio-cor-fundo-anterior: #FFFFFF;
-  --inicio-cor-fundo-suave-anterior: #F2F5F7;
-  --inicio-cor-texto-suave-anterior: #6F8FA6;
-  --inicio-cor-borda-anterior: #6F8FA6;
-  --inicio-sombra-anterior: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --inicio-cor-fundo-suave-anterior: #F4F7FA;
+  --inicio-cor-texto-suave-anterior: #536b88;
+  --inicio-cor-borda-anterior: #cbd6e2;
+  --inicio-sombra-anterior: 0 2px 8px rgba(12, 29, 59, 0.08);
+
+  /* Tons de azul selecionados da paleta oficial para sobreposições e transparências suaves */
+  --cor-sobreposicao-escura: rgba(12, 29, 59, 0.85);
+  --cor-sobreposicao-media: rgba(24, 58, 119, 0.76);
+  --cor-sobreposicao-destaque: rgba(42, 101, 207, 0.65);
 }
 
 /* ========== 2. RESET E BASE ========== */
@@ -199,12 +204,13 @@ button:focus-visible {
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 10px rgba(12, 29, 59, 0.18);
 }
 
 .cabecalho {
-  border-bottom: 3px solid var(--cor-fundo);
   background-color: var(--cor-primaria);
   color: var(--cor-fundo);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .cabecalho-conteudo {
@@ -212,39 +218,68 @@ button:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--espaco-sm);
+  gap: var(--espaco-md);
   padding-top: var(--espaco-sm);
   padding-bottom: var(--espaco-sm);
+  min-height: 72px;
 }
 
-/* Nome do colégio junto da marca (ícone de araucária, veja componentes.js) */
+/* Marca oficial do colégio com o nome alinhado verticalmente */
 .cabecalho-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--espaco-sm);
+  gap: var(--espaco-md);
   color: var(--cor-fundo);
   font-family: var(--fonte-titulo);
   font-weight: 700;
-  font-size: 1.0625rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
   text-decoration: none;
+  border-radius: var(--raio);
+  padding: var(--espaco-xs) var(--espaco-sm);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cabecalho-logo:hover {
+  opacity: 0.95;
+}
+
+.cabecalho-logo:focus-visible {
+  outline: 3px solid var(--cor-fundo);
+  outline-offset: 2px;
 }
 
 .cabecalho-logo img {
   width: auto;
   height: 52px;
+  max-width: 56px;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
+/* Botão do menu para celular */
 .menu-botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: var(--espaco-xs) var(--espaco-md);
-  border: 1px solid var(--cor-fundo);
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: var(--raio);
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--cor-fundo);
   font-family: var(--fonte-texto);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-botao:hover,
+.menu-botao:focus-visible {
+  background-color: var(--cor-fundo);
+  color: var(--cor-profunda);
+  border-color: var(--cor-fundo);
 }
 
 .menu-nav {
@@ -256,6 +291,9 @@ button:focus-visible {
   flex-direction: column;
   gap: var(--espaco-xs);
   list-style: none;
+  margin-top: var(--espaco-xs);
+  padding-top: var(--espaco-xs);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .menu-lista.aberto {
@@ -263,56 +301,197 @@ button:focus-visible {
 }
 
 .menu-lista a {
-  display: block;
-  padding: var(--espaco-sm);
+  display: inline-flex;
+  align-items: center;
+  padding: var(--espaco-sm) var(--espaco-md);
+  min-height: 44px;
   border-radius: var(--raio);
   color: var(--cor-fundo);
   font-weight: 500;
   text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
-.menu-lista a:hover,
-.menu-lista a:focus,
+.menu-lista a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--cor-fundo);
+}
+
 .menu-lista a:focus-visible {
-  background-color: var(--cor-fundo);
-  color: var(--cor-profunda);
-  text-decoration: underline;
+  outline: 3px solid var(--cor-fundo);
+  outline-offset: 2px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: var(--cor-fundo);
 }
 
-/* Link da página atual */
+/* Link da página atual: alto contraste e visual diferenciado */
 .menu-lista a.ativo,
-.menu-lista a.ativo:focus,
 .menu-lista a.ativo:focus-visible {
   background-color: var(--cor-fundo);
-  color: var(--cor-primaria);
+  color: var(--cor-profunda);
   font-weight: 700;
+  box-shadow: 0 1px 4px rgba(12, 29, 59, 0.15);
 }
 
 .menu-lista a.ativo:hover {
-  background-color: var(--cor-fundo);
-  color: var(--cor-profunda);
+  background-color: var(--cor-fundo-suave);
+  color: var(--cor-primaria);
 }
 
 /* ========== 5. RODAPÉ ========== */
 .rodape {
-  padding-top: var(--espaco-lg);
+  margin-top: auto;
+  padding-top: var(--espaco-xl);
   padding-bottom: var(--espaco-lg);
   background-color: var(--cor-profunda);
   color: var(--cor-fundo);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
-.rodape p {
-  margin-bottom: var(--espaco-xs);
+.rodape-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-lg);
+}
+
+.rodape-topo {
+  text-align: center;
+  padding-bottom: var(--espaco-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .rodape-nome {
   font-family: var(--fonte-titulo);
   font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--cor-fundo);
+  margin-bottom: 0;
+  letter-spacing: 0.01em;
 }
 
-/* Em telas maiores, os links ficam ao lado do nome e sempre visíveis. */
+/* Grade de áreas institucionais (WhatsApp, Instagram, Facebook, Endereço) */
+/* Sem caixas/quadrados em volta; apenas linhas divisórias sutis entre cada bloco */
+.rodape-grade {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* Item clicável independente e limpo */
+.rodape-item {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-md);
+  flex: 1 1 220px;
+  padding: var(--espaco-md) var(--espaco-lg);
+  color: var(--cor-fundo);
+  text-decoration: none;
+  background-color: transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Remove a linha do último item */
+.rodape-item:last-child {
+  border-right: none;
+}
+
+.rodape-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  opacity: 0.95;
+}
+
+.rodape-item:focus-visible {
+  outline: 2px solid var(--cor-fundo);
+  outline-offset: 2px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Ícone da rede / contato sem moldura externa */
+.rodape-item-icone {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s ease;
+}
+
+.rodape-item:hover .rodape-item-icone {
+  transform: scale(1.08);
+}
+
+/* Para o ícone do Facebook, remove qualquer filtro ou efeito de brilho */
+.rodape-card-icone-facebook {
+  filter: none;
+}
+
+.rodape-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.35;
+  font-size: 0.88rem;
+}
+
+.rodape-item-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 0.95rem;
+  color: var(--cor-fundo);
+}
+
+.rodape-item-linha {
+  color: rgba(255, 255, 255, 0.85);
+  word-break: break-word;
+}
+
+.rodape-item-nota {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  margin-top: 1px;
+}
+
+.rodape-base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-sm);
+  padding-top: var(--espaco-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.85rem;
+}
+
+.rodape-base p {
+  margin-bottom: 0;
+}
+
+/* Link discreto para a área administrativa */
+.rodape-link-admin {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: var(--raio);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.rodape-link-admin:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.rodape-link-admin:focus-visible {
+  outline: 2px solid var(--cor-fundo);
+  outline-offset: 2px;
+  color: var(--cor-fundo);
+}
+
+/* ========== 6. RESPONSIVIDADE E ACESSIBILIDADE GLOBAL ========== */
 @media (min-width: 768px) {
   .menu-botao {
     display: none;
@@ -325,17 +504,75 @@ button:focus-visible {
   .menu-lista {
     display: flex;
     flex-direction: row;
-  }
-}
-
-@media (max-width: 480px) {
-  .cabecalho-logo img {
-    height: 40px;
+    align-items: center;
+    gap: var(--espaco-xs);
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
   }
 }
 
 @media (max-width: 768px) {
   .cabecalho-logo {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    gap: var(--espaco-sm);
+  }
+
+  .cabecalho-logo img {
+    height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabecalho-conteudo {
+    min-height: 60px;
+  }
+
+  .cabecalho-logo {
+    font-size: 0.88rem;
+    max-width: calc(100% - 80px);
+  }
+
+  .cabecalho-logo img {
+    height: 38px;
+  }
+
+  .rodape {
+    padding-top: var(--espaco-lg);
+    padding-bottom: var(--espaco-md);
+  }
+
+  .rodape-grade {
+    flex-direction: column;
+  }
+
+  .rodape-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding: var(--espaco-sm) var(--espaco-xs);
+  }
+
+  .rodape-item:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Respeito à preferência do usuário por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .rodape-item,
+  .rodape-item:hover,
+  .rodape-item:focus-visible,
+  .rodape-item-icone,
+  .rodape-item:hover .rodape-item-icone {
+    transform: none;
   }
 }

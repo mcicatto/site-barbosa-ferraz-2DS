@@ -1,0 +1,90 @@
+/*
+  Estilo da página Arquivos
+  Equipe: Downloads
+  Somente a equipe Downloads edita este arquivo.
+  Use apenas as variáveis de main.css (nada de cor em hexadecimal).
+  Classes desta página começam com "arquivos-" (ex.: .arquivos-card).
+  Reaproveita do main.css o .container e o .botao.
+*/
+
+/* ========== 1. CABEÇALHO DA SEÇÃO ========== */
+
+.arquivos-header {
+  margin-bottom: var(--espaco-lg);
+  max-width: 70ch;
+}
+
+/* Tira o espaço extra do último parágrafo antes da grade */
+.arquivos-header p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========== 2. GRADE DE CARDS ========== */
+
+/* Computador: 4 cards por linha.
+   O "minmax(0, 1fr)" impede que um título longo estoure a coluna. */
+.arquivos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--espaco-lg);
+}
+
+/* ========== 3. CARD ========== */
+
+/* Card de tamanho uniforme: ícone no topo, título no meio e botão embaixo.
+   A altura mínima deixa o card maior e mais proporcional dentro da grade. */
+.arquivos-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-md);
+  min-height: 280px;
+  padding: var(--espaco-md);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  text-align: center;
+}
+
+/* Ícone ilustrativo no topo do card */
+.arquivos-icone {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* Título centralizado, podendo ocupar mais de uma linha */
+.arquivos-card-titulo {
+  font-size: 1.0625rem;
+  color: var(--cor-profunda);
+  margin-bottom: 0;
+}
+
+/* Botão "Baixar" alinhado na largura do card */
+.arquivos-botao {
+  width: 100%;
+  text-align: center;
+}
+
+/* ========== 4. RESPONSIVIDADE ========== */
+
+/* Tablet: 3 cards por linha */
+@media (max-width: 1024px) {
+  .arquivos-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tablet menor: 2 cards por linha */
+@media (max-width: 768px) {
+  .arquivos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Celular: 1 card por linha (cabe em 360px sem rolagem lateral) */
+@media (max-width: 460px) {
+  .arquivos-grid {
+    grid-template-columns: 1fr;
+  }
+}

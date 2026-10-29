@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquivos | Colégio Estadual Barbosa Ferraz</title>
+  <!-- Estilo compartilhado por todas as páginas -->
+  <link rel="stylesheet" href="../../main.css">
+  <!-- Estilo só desta página (equipe Downloads) -->
+  <link rel="stylesheet" href="pagina.css">
+</head>
+<body data-pagina="arquivos">
+
+  <!-- O menu é montado pelo arquivo principal main.js -->
+  <div id="menu"></div>
+
+  <main class="container">
+    <!-- Seção de documentos e arquivos para download -->
+    <section class="arquivos" aria-labelledby="arquivos-titulo">
+
+      <!-- Cabeçalho: título, apresentação e orientação ao visitante -->
+      <header class="arquivos-header">
+        <h1 id="arquivos-titulo">Arquivos</h1>
+        <p>
+          Aqui você encontra os documentos do colégio, como calendário, horários,
+          guias e formulários, reunidos em um só lugar.
+        </p>
+        <p>Selecione uma das opções abaixo para baixar o arquivo desejado.</p>
+      </header>
+
+      <!-- Grade de cards: preenchida pelo pagina.js -->
+      <div class="arquivos-grid" id="arquivos-grid"></div>
+
+    </section>
+  </main>
+
+  <!-- O rodapé é montado pelo arquivo principal main.js -->
+  <div id="rodape"></div>
+
+  <!-- Primeiro os comportamentos globais, depois o JavaScript desta página -->
+  <script src="../../main.js"></script>
+  <script src="pagina.js"></script>
+</body>
+</html>
